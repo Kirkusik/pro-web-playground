@@ -5,26 +5,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet"> -->
-    <link rel="stylesheet" href="./fonts.css">
+        rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href="./fonts.css"> -->
 
     <style>
         body {
             font-family: "Poppins", sans-serif;
         }
+
+        h1 {
+            text-align: center;
+            color: crimson;
+        }
+
+        ol {
+            max-inline-size: 80vw;
+            margin-inline: auto;
+            margin-block: 40px;
+
+            display: grid;
+            row-gap: 24px;
+        }
+
+        li::marker {
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        strong {
+            display: block;
+            font-size: 20px;
+        }
     </style>
 </head>
 
 <body>
-    <h1>
-        Some big text must be here: <br><br>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita perferendis assumenda alias et ducimus optio
-        est! Enim corrupti deleniti, reprehenderit odio quisquam ipsam pariatur animi, quos id magni est sapiente.
-    </h1>
+    <h1>Избавляемся от блокирующего GOOGLE FONTS!!!</h1>
+    <ol>
+        <li>
+
+            <strong>Скачать CSS-файл из Google Fonts в файл "fonts.css" (или с другим удобным названием)</strong>
+        </li>
+
+        <li>
+            <strong>
+                Найти все URL шрифтов в файле и сохранить их:
+            </strong>
+
+            Select-String -Path "fonts.css" -Pattern "https://fonts.gstatic.com/[^)]*" | ForEach-Object
+            {$_.Matches.Value} |
+            Set-Content "font-urls.txt"
+        </li>
+
+        <li>
+            <strong>
+                Создать папку fonts/ и скачать все шрифты:
+            </strong>
+
+            New-Item -ItemType Directory -Path "fonts"
+        </li>
+        <li>
+            <strong>
+                Забираем и сохраняем все файлы шрифтов по ссылкам из "font-urls.txt"
+            </strong>
+
+            Get-Content "font-urls.txt" | ForEach-Object { Invoke-WebRequest -Uri $_ -OutFile ("fonts/" + ($_ -split
+            "/")[-1]) }
+        </li>
+    </ol>
+
 </body>
 
 </html>
