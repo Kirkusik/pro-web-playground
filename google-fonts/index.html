@@ -23,6 +23,10 @@
             color: crimson;
         }
 
+        h2 {
+            text-align: center;
+        }
+
         ol {
             max-inline-size: 80vw;
             margin-inline: auto;
@@ -50,8 +54,7 @@
     <h2>Для POWERSHELL</h2>
     <ol>
         <li>
-
-            <strong>Скачать CSS-файл из Google Fonts в файл "fonts.css" (или с другим удобным названием)</strong>
+            <strong>Скачать CSS-файл из Google Fonts в файл "fonts.css"</strong>
         </li>
 
         <li>
@@ -84,8 +87,7 @@
     <h2>Для bash (Linux/macOS)</h2>
     <ol>
         <li>
-
-            <strong>Скачать CSS-файл из Google Fonts в файл "fonts.css" (или с другим удобным названием)</strong>
+            <strong>Скачать CSS-файл из Google Fonts в файл "fonts.css"</strong>
         </li>
 
         <li>
@@ -110,7 +112,13 @@
 
             while read url; do <br>
             curl -o "fonts/$(basename "$url")" "$url" <br>
-            done < font-urls.txt </li>
+            done < font-urls.txt <br>
+
+
+                <b> <small>Вместо `curl` можно использовать `wget`</small></b>
+
+
+        </li>
     </ol>
 
 </body>
